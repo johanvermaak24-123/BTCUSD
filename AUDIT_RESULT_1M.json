@@ -1,0 +1,11 @@
+{
+  "totalRandomizedScenarios": 1000000,
+  "failures": 0,
+  "qualifiedFast": 89717,
+  "waitFast": 310283,
+  "qualifiedSwing": 210298,
+  "waitSwing": 89702,
+  "deterministicChecks": "closed-bar aggregation, open-bar exclusion, stale-series rejection, BTC storage isolation, mark-to-close bid/ask",
+  "firstFailures": [],
+  "seed": "0x51A7C0DE"
+}

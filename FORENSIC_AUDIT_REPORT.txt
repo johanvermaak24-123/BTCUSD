@@ -1,0 +1,56 @@
+BTC ORACLE R5.1 — FORENSIC AUDIT REPORT
+19 September 2026
+
+FINAL RESULT
+PASS — 1,000,000 randomized scenarios, 0 failures after fixes.
+In-app 30,000-case self-check also passes.
+
+RANDOMIZED AUDIT SPLIT
+- 400,000 Fast Money plan scenarios
+- 300,000 Swing plan scenarios
+- 200,000 spread/cost invariant scenarios
+- 100,000 position-risk scenarios
+TOTAL: 1,000,000
+
+DETERMINISTIC CHECKS
+- Closed-bar aggregation
+- Current/open candle exclusion
+- Stale-series rejection
+- BTC storage isolation
+- BUY bid / SELL ask mark-to-close handling
+- Three-stage entry ladder immutability
+- Active ladder rung cost geometry
+
+REAL DEFECTS FOUND AND FIXED DURING THIS AUDIT
+1. Higher-timeframe aggregation could include the current incomplete bucket.
+   FIX: only fully closed source/aggregate candles can drive closed-timeframe logic.
+
+2. Learning resolution could use an open 5-minute bar in some circumstances.
+   FIX: outcome learning resolves only from closed BTC 5-minute OHLC bars.
+
+3. Cross-market DXY evidence could become stale, especially while traditional markets are closed.
+   FIX: DXY and ETH confirmation now require freshness; stale evidence is ignored.
+
+4. Cost geometry was initially validated before final price rounding.
+   FIX: spread/cost geometry is revalidated on the actual rounded order prices.
+
+5. Adaptive Entry 1/2/3 selection could choose Entry 1 even when that rung's TP1 distance was too small versus spread.
+   FIX: each candidate rung must individually pass cost geometry before it may become the active entry. If E1 is unsafe, the selector falls back to an eligible rung (normally E2).
+
+FINAL STATIC INTEGRITY
+- JavaScript parse: PASS
+- HTML duplicate IDs: 0
+- Missing selector IDs: 0
+- Duplicate named function declarations: 0
+- Residual XAUUSD/USDJPY/Gold storage-key contamination: 0
+- BTC instrument key: BTCUSD
+- BTC storage key: btcOraclePrimeStateV1
+
+DATA/LEARNING TRUTH
+There was no mature BTC ORACLE R5 resolved-outcome brain/data export available for an empirical win-rate or expectancy audit. Therefore this audit does NOT fabricate a performance percentage. The build keeps BTC learning separate from Gold and is now designed to learn only from chronologically valid closed-bar outcomes.
+
+LIMITATION
+A million passing engine tests cannot prove future profitability. Real predictive quality must be measured from accumulated resolved BTC outcomes after deployment. The purpose of this audit is to prevent code, chronology, stale-data, cost-geometry and state-management errors from masquerading as trading edge.
+
+SHA256 index.html
+9a54ac7ee2139ab66e982c7fcea7436a5d694360199952d6eb17837aa857bf9e
