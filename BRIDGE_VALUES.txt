@@ -1,0 +1,9 @@
+BTC ORACLE R5.4 — PRIVATE BRIDGE VALUES
+
+PRIVATE CHANNEL
+btc_048YkjdqdTYvvDJgoeTmYTyg7t7HiR5v
+
+MT5 WRITE KEY
+c7m7YqTUHUY0CUdfgTyKj2x2TgAvoxk9jF1YE2UG7mc
+
+Keep the MT5 WRITE KEY private. The channel is used by your Oracle page to read your own live bridge feed.

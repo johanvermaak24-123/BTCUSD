@@ -1,0 +1,45 @@
+BTC ORACLE R5.4 AUTO MT5 BRIDGE — EENMALIGE SETUP
+
+WAT DIT DOEN
+- Pepperstone MT5 stuur BTCUSD BID/ASK outomaties na Oracle.
+- Dit stuur ook jou BTCUSD position state: FLAT / BUY / SELL en weighted entry.
+- Die EA PLAAS GEEN TRADES NIE. Hy stuur net quote + position telemetry.
+- Oracle blok nuwe entries as die direkte MT5 quote stale raak.
+
+JOU PRIVATE WAARDES
+CHANNEL: btc_048YkjdqdTYvvDJgoeTmYTyg7t7HiR5v
+WRITE KEY: c7m7YqTUHUY0CUdfgTyKj2x2TgAvoxk9jF1YE2UG7mc
+
+1) HOST DIE RELAY
+Host relay_server.js + package.json as 'n klein Node web service met HTTPS (Replit/Render/Railway ens.).
+Die start command is: npm start
+Kry die publieke HTTPS URL, bv. https://jou-bridge....
+
+2) MT5 OP PC
+- Maak MetaEditor oop.
+- Maak 'n nuwe Expert Advisor en gebruik BTC_ORACLE_R5_4_MT5_BRIDGE.mq5.
+- Compile.
+- In MT5: Tools > Options > Expert Advisors.
+- Tick 'Allow WebRequest for listed URL'.
+- Voeg NET jou relay origin by, bv. https://jou-bridge....
+- Attach die EA op jou Pepperstone BTCUSD chart.
+- In Inputs verander RelayBaseUrl na jou relay HTTPS URL.
+- Channel en Write Key is reeds in hierdie pakket se EA ingevul.
+- Laat MT5 op die PC oop/connected wees vir die bridge om te werk.
+
+3) GITHUB PAGES
+- Vervang jou huidige index.html met die nuwe R5.4 index.html uit hierdie pakket.
+- Maak die site oop.
+- Bo moet staan: BTC ORACLE R5.4 AUTO MT5 BRIDGE.
+
+4) ORACLE OP JOU FOON
+- By AUTO PEPPERSTONE MT5 BRIDGE:
+  BRIDGE URL = dieselfde relay HTTPS URL
+  PRIVATE CHANNEL = btc_048YkjdqdTYvvDJgoeTmYTyg7t7HiR5v
+- Druk CONNECT MT5.
+- Sodra die EA stuur, moet Oracle DIRECT PEPPERSTONE MT5 wys met BID/ASK en quote ouderdom in sekondes.
+
+5) BELANGRIK
+- Jy hoef NIE meer 'n live BTC prys met die hand in te tik nie.
+- As MT5/PC/relay afgaan of quote > ongeveer 6 sekondes stale is, word nuwe entries geblok.
+- Public BTC feeds bly net vir research/historical bars; die direkte broker quote authorise die live trade levels.

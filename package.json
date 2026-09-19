@@ -1,0 +1,7 @@
+{
+  "name": "btc-oracle-mt5-relay",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {"start": "node relay_server.js"},
+  "engines": {"node": ">=18"}
+}
