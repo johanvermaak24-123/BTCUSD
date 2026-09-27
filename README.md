@@ -1,27 +1,25 @@
-# BTC Oracle R6.12.0 GOD — Forensic Truth
+# BTC Oracle R6.11.5 — Truth Core
 
-Single-file BTCUSD Oracle build with an isolated BTC brain:
+This is a self-contained GitHub Pages-ready paper/evaluation PWA.
 
-- Storage key: `btcOraclePrimeStateV1`
-- Instrument guard: `BTCUSD`
-- Build: `2026-09-26-BTC-R6.12.0-GOD-FORENSIC-TRUTH`
-- Entry behavior: preserved from R6.11.4; the GOD layer does not add a blanket no-trade gate for missing public microstructure.
+## What changed
 
-Open the HTML file directly in a modern browser. The app keeps its brain in browser storage and supports JSON brain export/import from the Learning section.
+- One canonical signal ledger.
+- Separate paper entry confirmation from simulated price triggers.
+- Terminal learning only after TP1, TP2, SL or expiry.
+- Cost-aware entry levels using spread and ATR.
+- Missing data is shown as incomplete instead of silently treated as neutral.
+- Brain import/export is supported.
+- Existing R6.11.4 rewards are preserved as forensic evidence, not copied into new terminal trade outcomes.
 
-## Truth model
+## Use
 
-The build keeps these evidence lanes separate:
+1. Open `index.html`.
+2. Select **Import brain** and choose the exported BTC brain JSON.
+3. Review the forensic blockers.
+4. Use **Refresh scan** for a paper signal.
+5. If a trade is actually taken, press **Confirm actual entry** and enter the real fill price.
+6. Mark TP1, TP2, SL or Expired only when the outcome is real.
+7. Export the Truth Core brain regularly.
 
-1. Strict closed plan fills: only side-aware TP/SL-resolved plan outcomes count.
-2. Evaluation observations: future-path and direction observations can remain useful without becoming trade P/L.
-3. Fast 15-minute learning: separate from strict 1H/3H/6H proof.
-4. News reaction truth: source/event reaction evidence, freshness-bounded.
-5. Confirmed MT5 positions: requires exact entry and a verified close mark.
-6. False flips: recorded and resolved independently; they do not hard-block entries.
-
-`OPEN_AT_HORIZON`, `NO_ENTRY`, and ambiguous bars are retained for audit but are not strict closed-trade learning.
-
-## Validation
-
-The package includes `tests/god_forensic_regression.js`, which checks state preservation, strict-outcome classification, news freshness, daily-bar deduplication, plan lifecycle state, and the existing execution self-check.
+This version does not connect to MT5 and does not auto-trade.
