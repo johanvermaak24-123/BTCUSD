@@ -1,25 +1,24 @@
-# BTC Oracle R6.11.5 — Truth Core
+# BTC Oracle R6.12 — Tick Learning
 
-This is a self-contained GitHub Pages-ready paper/evaluation PWA.
+This is a paper/evaluation build for Pepperstone BTCUSD through MT5.
 
-## What changed
+## What it does
 
-- One canonical signal ledger.
-- Separate paper entry confirmation from simulated price triggers.
-- Terminal learning only after TP1, TP2, SL or expiry.
-- Cost-aware entry levels using spread and ATR.
-- Missing data is shown as incomplete instead of silently treated as neutral.
-- Brain import/export is supported.
-- Existing R6.11.4 rewards are preserved as forensic evidence, not copied into new terminal trade outcomes.
+- Imports the previous truth brain.
+- Imports MT5 tick CSV data.
+- Stores raw ticks in the browser IndexedDB database.
+- Creates rule-labelled mock momentum entries.
+- Resolves each mock entry against later ticks using spread-aware bid/ask prices.
+- Records WIN, LOSS and EXPIRED outcomes by strategy, direction and regime.
+- Exports the truth brain and a tick-learning summary.
 
-## Use
+## MT5 capture
 
-1. Open `index.html`.
-2. Select **Import brain** and choose the exported BTC brain JSON.
-3. Review the forensic blockers.
-4. Use **Refresh scan** for a paper signal.
-5. If a trade is actually taken, press **Confirm actual entry** and enter the real fill price.
-6. Mark TP1, TP2, SL or Expired only when the outcome is real.
-7. Export the Truth Core brain regularly.
+1. Open Pepperstone MT5 desktop.
+2. Open MetaEditor and create an Expert Advisor from `BTC_Oracle_MT5_Tick_Capture.mq5`.
+3. Compile it and attach it to the Pepperstone BTCUSD chart. If Pepperstone uses a suffix, change `InpSymbol` or attach it to that exact symbol.
+4. Allow the EA to run. It writes `btc_oracle_ticks.csv` to the terminal's `MQL5/Files` folder.
+5. Move that CSV to the phone or computer running the Oracle.
+6. Open the Oracle, press **Import MT5 ticks**, and select the CSV.
 
-This version does not connect to MT5 and does not auto-trade.
+This build is paper-only. It does not place live orders and does not claim that a mock result is a guaranteed trading edge.
